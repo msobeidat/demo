@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Calculator</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        input { padding: 10px; margin: 10px; width: 60px; }
+        button { padding: 10px 20px; cursor: pointer; background: #28a745; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h2>DevOps Simple Calculator</h2>
+    <form method="POST">
+        <input type="number" name="num1" value="{{ num1 }}" required placeholder="0">
+        <span> + </span>
+        <input type="number" name="num2" value="{{ num2 }}" required placeholder="0">
+        <button type="submit">Calculate</button>
+        <h3>Result: <input type="text" readonly value="{{ result }}"></h3>
+    </form>
+</body>
+</html>
