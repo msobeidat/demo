@@ -9,17 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
+          python-version: '3.10'
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+
       - name: Run Unit Tests
         run: pytest -v
+
       - name: Run Security Scan
-        run: bandit -r
+        run: bandit -r .
         continue-on-error: true
 
   docker-deploy:
@@ -27,12 +31,14 @@ jobs:
     needs: build-test-scan
     steps:
       - uses: actions/checkout@v4
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: msobeidat
-          password: ${{secrets.DOCKER_PASSWORD}}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build & Push
         run: |
-          docker login -t msobeidat/demo:latest .
+          docker build -t msobeidat/demo:latest .
           docker push msobeidat/demo:latest
