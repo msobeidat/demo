@@ -8,10 +8,15 @@ def calculator():
     num1 = ""
     num2 = ""
     if request.method == 'POST':
+        # الحصول على الأرقام من الخانات
         num1 = request.form.get('num1')
         num2 = request.form.get('num2')
         if num1 and num2:
-            result = int(num1) + int(num2)
+            try:
+                result = int(num1) + int(num2)
+            except ValueError:
+                result = "Error: Please enter numbers only"
+    
     return render_template('index.html', result=result, num1=num1, num2=num2)
 
 if __name__ == "__main__":
